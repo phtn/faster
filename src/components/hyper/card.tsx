@@ -1,7 +1,7 @@
 import type { ComponentProps, ReactNode } from 'react'
 import { View } from 'react-native'
 
-import { Badge, Button, Card, CardContent, SocialIcon, ThemedText, type SocialNetwork } from '@/components/ui'
+import { Badge, Button, Card, CardContent, SocialIcon, Text, type SocialNetwork } from '@/components/ui'
 import { cn } from '@/lib/cn'
 
 type HyperCardProps = {
@@ -41,11 +41,11 @@ export function HyperCard({
         <View className='gap-5'>
           <View className='flex-1 gap-1'>
             <View className='flex-row items-center justify-between'>
-              <ThemedText type='eyebrow'>{accentLine}</ThemedText>
-              <ThemedText type='linkPrimary'>&rarr;</ThemedText>
+              <Text type='eyebrow'>{accentLine}</Text>
+              <Text type='linkPrimary'>&rarr;</Text>
             </View>
             <View className='h-18 justify-center'>
-              <ThemedText className='text-[20px] text-balance leading-6 font-normal w-full'>{title}</ThemedText>
+              <Text className='text-[20px] text-balance leading-6 font-normal w-full'>{title}</Text>
             </View>
             {badge ? <Badge tone='neutral'>{badge}</Badge> : null}
           </View>
@@ -62,5 +62,27 @@ export function HyperCard({
         </View>
       </CardContent>
     </Card>
+  )
+}
+
+interface StatusCardProps {
+  detail: string
+  owner: string
+  status: string
+  title: string
+}
+export const StatusCard = ({ detail, status, title }: StatusCardProps) => {
+  return (
+    <View className='rounded-lg bg-background px-4 py-4'>
+      <View className='flex-row items-start justify-between gap-3'>
+        <View className='flex-1 gap-1'>
+          <Text className='font-medium'>{title}</Text>
+          <Text type='small' themeColor='textSecondary'>
+            {detail}
+          </Text>
+        </View>
+        <Badge tone='neutral'>{status}</Badge>
+      </View>
+    </View>
   )
 }

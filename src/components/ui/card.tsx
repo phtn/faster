@@ -1,7 +1,7 @@
-import { ThemedText } from '@/components/ui'
 import { cn } from '@/lib/cn'
 import type { PropsWithChildren, ReactNode } from 'react'
 import { View, type ViewProps } from 'react-native'
+import { Text } from './text'
 
 type AppCardProps = PropsWithChildren<
   ViewProps & {
@@ -47,23 +47,21 @@ export function CardHeader({
   trailing
 }: AppCardHeaderProps) {
   return (
-    <View className={cn('px-5 pt-5 pb-4', className)}>
+    <View className={cn('px-4 pt-4 pb-4', className)}>
       <View className='flex-row items-start gap-4'>
         <View className='flex-1 gap-1'>
           {eyebrow ? (
-            <ThemedText type='eyebrow' className={eyebrowClassName}>
+            <Text type='eyebrow' className={eyebrowClassName}>
               {eyebrow}
-            </ThemedText>
+            </Text>
           ) : null}
 
-          {title ? (
-            <ThemedText className={cn('text-[16px] leading-7 font-medium', titleClassName)}>{title}</ThemedText>
-          ) : null}
+          {title ? <Text className={cn('text-[18px] leading-7 font-medium', titleClassName)}>{title}</Text> : null}
 
           {description ? (
-            <ThemedText themeColor='textSecondary' className={cn('leading-5.5', descriptionClassName)}>
+            <Text themeColor='textSecondary' className={cn('leading-5.5', descriptionClassName)}>
               {description}
-            </ThemedText>
+            </Text>
           ) : null}
 
           {children}
@@ -76,13 +74,13 @@ export function CardHeader({
 }
 
 export function CardContent({ children, className }: AppCardSectionProps) {
-  return <View className={cn('px-5 pb-5 gap-4', className)}>{children}</View>
+  return <View className={cn('px-4 pb-4 gap-4', className)}>{children}</View>
 }
 
 export function CardDivider() {
-  return <View className='mx-5 h-px bg-border' />
+  return <View className='mx-4 h-px bg-border' />
 }
 
 export function CardFooter({ children, className }: AppCardSectionProps) {
-  return <View className={cn('px-5 pt-4 pb-5 gap-4', className)}>{children}</View>
+  return <View className={cn('px-4 pt-4 pb-4 gap-4', className)}>{children}</View>
 }

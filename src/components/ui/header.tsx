@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 import { View } from 'react-native'
 
-import { ThemedText } from '@/components/ui'
 import { cn } from '@/lib/cn'
+import { Text } from './text'
 
 type SectionHeadingProps = {
   align?: 'left' | 'center'
@@ -30,24 +30,25 @@ export function SectionHeading({
   return (
     <View className={cn('gap-1', centered && 'items-center', className)}>
       {eyebrow ? (
-        <ThemedText type='eyebrow' className={cn(centered && 'text-center')}>
+        <Text type='eyebrow' className={cn(centered && 'text-center')}>
           {eyebrow}
-        </ThemedText>
+        </Text>
       ) : null}
 
-      <ThemedText type='subtitle' className={cn(centered && 'text-center', titleClassName)}>
+      <Text type='header' className={cn(centered && 'text-center', titleClassName)}>
         {title}
-      </ThemedText>
+      </Text>
 
       {description ? (
-        <ThemedText
+        <Text
+          type='small'
           themeColor='textSecondary'
           className={cn('max-w-160', centered && 'text-center', descriptionClassName)}>
           {description}
-        </ThemedText>
+        </Text>
       ) : null}
 
-      {trailing ? <View className={cn(centered && 'items-center')}>{trailing}</View> : null}
+      {trailing ? <View className={cn(centered && 'items-center', 'mt-2')}>{trailing}</View> : null}
     </View>
   )
 }

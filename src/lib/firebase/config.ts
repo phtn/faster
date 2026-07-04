@@ -1,12 +1,13 @@
 const env = (name: string) => process.env[name] ?? ''
+const firstEnv = (...names: string[]) => names.map(env).find(Boolean) ?? ''
 
 const firebaseWebConfig = {
-  apiKey: env('EXPO_PUBLIC_FIREBASE_WEB_API_KEY'),
+  apiKey: firstEnv('EXPO_PUBLIC_FIREBASE_WEB_API_KEY', 'EXPO_PUBLIC_FIREBASE_ANDROID_API_KEY'),
   authDomain: env('EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN'),
   projectId: env('EXPO_PUBLIC_FIREBASE_PROJECT_ID'),
   storageBucket: env('EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET'),
   messagingSenderId: env('EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID'),
-  appId: env('EXPO_PUBLIC_FIREBASE_WEB_APP_ID'),
+  appId: firstEnv('EXPO_PUBLIC_FIREBASE_WEB_APP_ID', 'EXPO_PUBLIC_FIREBASE_ANDROID_APP_ID'),
   measurementId: env('EXPO_PUBLIC_FIREBASE_WEB_MEASUREMENT_ID')
 } as const
 
@@ -15,9 +16,8 @@ const storageBucket = env('EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET')
 const messagingSenderId = env('EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID')
 const authDomain = env('EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN')
 
-// This app uses the Firebase JavaScript SDK in React Native, so native builds
-// should initialize with the Firebase Web app config instead of the Android/iOS
-// native app config files.
+// This app uses the Firebase JavaScript SDK in React Native. Prefer a Firebase
+// Web app config, but allow Android env values for local Android dev builds.
 export const firebaseConfig = firebaseWebConfig
 
 export const googleAuthConfig = {

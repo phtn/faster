@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react'
 import { View } from 'react-native'
 
-import { ThemedText } from '@/components/ui/text'
+import { Text } from '@/components/ui/text'
 import { cn } from '@/lib/cn'
 
 type AppBadgeProps = PropsWithChildren<{
@@ -23,7 +23,7 @@ export function Badge({ children, className, labelClassName, size, tone = 'accen
         size === 'sm' && 'px-1 py-0.5',
         className
       )}>
-      <ThemedText
+      <Text
         className={cn(
           'text-[11px] leading-3.5 font-semibold',
           tone === 'accent' && 'text-accent',
@@ -33,7 +33,7 @@ export function Badge({ children, className, labelClassName, size, tone = 'accen
           labelClassName
         )}>
         {children}
-      </ThemedText>
+      </Text>
     </View>
   )
 }
@@ -50,7 +50,7 @@ export function IconBadge({ children, className, labelClassName, size, tone = 'a
         size === 'sm' && 'size-5',
         className
       )}>
-      <ThemedText
+      <Text
         className={cn(
           'text-[16px] leading-3.5 font-semibold',
           tone === 'accent' && 'text-accent',
@@ -61,7 +61,7 @@ export function IconBadge({ children, className, labelClassName, size, tone = 'a
           labelClassName
         )}>
         {children}
-      </ThemedText>
+      </Text>
     </View>
   )
 }

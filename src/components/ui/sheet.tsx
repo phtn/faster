@@ -1,9 +1,10 @@
 import { RIcon } from '@/components/icons'
-import { Button, ThemedText } from '@/components/ui'
 import { Href, useRouter } from 'expo-router'
 import { BottomSheet, Button as Btn } from 'heroui-native'
 import { ReactNode, useCallback, useState } from 'react'
 import { View } from 'react-native'
+import { Button } from './button'
+import { Text } from './text'
 
 interface SheetProps {
   children?: ReactNode
@@ -49,7 +50,7 @@ export const Sheet = ({ children }: SheetProps) => {
               onPress={navigate('/settings')}
               className='flex-1 flex-col items-center justify-center space-y-0 aspect-square'>
               <RIcon name='chest' size={28} color='white' />
-              <ThemedText className='text-xs text-foreground/80'>Settings</ThemedText>
+              <Text className='text-xs text-foreground/80'>Settings</Text>
             </Button>
           </View>
         </BottomSheet.Content>

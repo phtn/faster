@@ -1,10 +1,12 @@
-import { Button, IconButton, SignoutConfirm } from '@/components/ui'
 import { useAppTheme } from '@/ctx/theme-context'
 import { getInitials } from '@/utils/helpers'
 import { useRouter } from 'expo-router'
 import { Avatar, Menu, Separator, Switch } from 'heroui-native'
 import { useCallback } from 'react'
 import { View } from 'react-native'
+import { Button } from './button'
+import { SignoutConfirm } from './confirm'
+import { IconButton } from './icon-button'
 
 interface UserMenuProps {
   photoUrl?: string | null

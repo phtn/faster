@@ -3,23 +3,15 @@ import type { User } from 'firebase/auth'
 import { useMemo } from 'react'
 import { Dimensions, useWindowDimensions, View } from 'react-native'
 
-import {
-  Badge,
-  ThemedText,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  SectionHeading
-} from '@/components/ui'
-import { RIcon } from '@/components/icons'
-import { HyperCard } from '@/components/hyper'
 import { ActionCard, ClubHeroVisual, EventRow, MemberPass } from '@/components/hyper/club'
+import { RIcon } from '@/components/icons'
+import { Badge, Button, Card, CardContent, CardHeader, SectionHeading, Text } from '@/components/ui'
 import { clubActions, clubEvents, stars, type Star } from '@/lib/club'
 import { cn } from '@/lib/cn'
-import { Topbar } from './topbar'
 import { Carousel } from './carousel'
+import { HyperCard } from './hyper'
 import { Screen } from './screen'
+import { Topbar } from './topbar'
 
 type MemberDashboardProps = {
   errorMessage?: string | null
@@ -52,10 +44,7 @@ export function MemberDashboard({ errorMessage, onSignOut, signingOut, user }: M
   const memberName = useMemo(() => getMemberName(user), [user])
 
   return (
-    <Screen
-      maxWidth={980}
-      innerClassName='gap-2'
-      stickyHeader={<Topbar photoUrl={user.photoURL} text={memberName} />}>
+    <Screen maxWidth={980} innerClassName='gap-2' stickyHeader={<Topbar photoUrl={user.photoURL} text={memberName} />}>
       <View className={cn('gap-4', isWide && 'flex-row items-stretch')}>
         <View className='flex-1 gap-4'>
           {/*<SectionHeading eyebrow='Amenities' title='Open now' titleClassName='text-[22px] leading-7' />*/}
@@ -92,7 +81,7 @@ export function MemberDashboard({ errorMessage, onSignOut, signingOut, user }: M
                 <Badge tone='neutral'>Reception notified</Badge>
               </View>
               <View className='gap-2'>
-                <ThemedText className='text-lg leading-8 font-medium'>Tonight at the house</ThemedText>
+                <Text className='text-lg leading-8 font-medium'>Tonight at the house</Text>
               </View>
               <View className='flex-row flex-wrap gap-3'>
                 <Button

@@ -4,7 +4,7 @@ import type { PropsWithChildren, ReactNode } from 'react'
 import { Pressable, View } from 'react-native'
 
 import { IconName, RIcon } from '@/components/icons'
-import { Badge, Button, Card, CardContent, CardHeader, ThemedText } from '@/components/ui'
+import { Badge, Button, Card, CardContent, CardHeader, Text } from '@/components/ui'
 import { type ClubAccent } from '@/lib/club'
 import { cn } from '@/lib/cn'
 
@@ -102,15 +102,13 @@ export function MetricTile({
   return (
     <View
       className={cn('flex-1 min-w-36 rounded-lg border bg-secondary px-4 py-4', getClubAccentClass(accent, 'border'))}>
-      <ThemedText type='small' themeColor='textSecondary'>
+      <Text type='small' themeColor='textSecondary'>
         {label}
-      </ThemedText>
-      <ThemedText className={cn('mt-2 text-[26px] leading-8 font-medium', getClubAccentClass(accent, 'text'))}>
-        {value}
-      </ThemedText>
-      <ThemedText type='small' themeColor='textSecondary' className='mt-1'>
+      </Text>
+      <Text className={cn('mt-2 text-[26px] leading-8 font-medium', getClubAccentClass(accent, 'text'))}>{value}</Text>
+      <Text type='small' themeColor='textSecondary' className='mt-1'>
         {detail}
-      </ThemedText>
+      </Text>
     </View>
   )
 }
@@ -147,12 +145,12 @@ export function ActionCard({
           </View>
           <View className='gap-1'>
             <View className='flex-row items-center gap-2'>
-              <ThemedText className='flex-1 text-[17px] leading-6 font-medium'>{label}</ThemedText>
+              <Text className='flex-1 text-[17px] leading-6 font-medium'>{label}</Text>
               <RIcon color='#8A8A91' name='home' size={18} />
             </View>
-            <ThemedText themeColor='textSecondary' className='leading-5'>
+            <Text themeColor='textSecondary' className='leading-5'>
               {description}
-            </ThemedText>
+            </Text>
           </View>
         </CardContent>
       </Card>
@@ -179,14 +177,14 @@ export function AmenityCard({
     <Card className={cn('flex-1 min-w-64 bg-secondary', getClubAccentClass(tone, 'border'), 'border-secondary')}>
       <CardHeader eyebrow={floor} title={name} trailing={<Badge tone='neutral'>{status}</Badge>} />
       <CardContent className='gap-4'>
-        <ThemedText themeColor='textSecondary' className='leading-5'>
+        <Text themeColor='textSecondary' className='leading-5'>
           {description}
-        </ThemedText>
+        </Text>
         <View className='flex-row items-center justify-between rounded-lg border border-border bg-background px-4 py-3'>
-          <ThemedText type='small' themeColor='textSecondary'>
+          <Text type='small' themeColor='textSecondary'>
             Hours
-          </ThemedText>
-          <ThemedText type='smallBold'>{hours}</ThemedText>
+          </Text>
+          <Text type='smallBold'>{hours}</Text>
         </View>
       </CardContent>
     </Card>
@@ -217,13 +215,13 @@ export function EventRow({
         <RIcon color={getClubAccentColor(accent)} name='grid' />
       </View>
       <View className='flex-1 gap-1'>
-        <ThemedText className='font-medium'>{title}</ThemedText>
-        <ThemedText type='small' themeColor='textSecondary'>
+        <Text className='font-medium'>{title}</Text>
+        <Text type='small' themeColor='textSecondary'>
           {date} - {location}
-        </ThemedText>
-        <ThemedText type='small' themeColor='textSecondary'>
+        </Text>
+        <Text type='small' themeColor='textSecondary'>
           {host}
-        </ThemedText>
+        </Text>
       </View>
     </View>
   )
@@ -238,12 +236,12 @@ export function MemberPass({ memberName, status = 'Access clear' }: { memberName
         <View className='relative gap-7'>
           <View className='flex-row items-start justify-between gap-4'>
             <View className='gap-0'>
-              <ThemedText
+              <Text
                 style={{ letterSpacing: 1.5 }}
                 className='text-[10px] leading-4 font-normal uppercase text-background/80 tracking-wider px-1'>
                 Founder Series
-              </ThemedText>
-              <ThemedText className='font-semibold text-background text-xl'>{memberName}</ThemedText>
+              </Text>
+              <Text className='font-semibold text-background text-xl'>{memberName}</Text>
             </View>
             <View className='h-10 w-10 items-center justify-center'>
               <RIcon color='#5856D6' name='grid' />
@@ -296,7 +294,7 @@ export function StepRow({ children, complete = true }: PropsWithChildren<{ compl
         )}>
         <RIcon color={complete ? '#38d48b' : '#8A8A91'} name='home' size={15} strokeWidth={2} />
       </View>
-      <ThemedText className='flex-1'>{children}</ThemedText>
+      <Text className='flex-1'>{children}</Text>
     </View>
   )
 }

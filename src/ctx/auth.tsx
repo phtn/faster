@@ -1,7 +1,5 @@
-import { onAuthStateChanged, signOut, type User } from 'firebase/auth'
+import type { User } from 'firebase/auth'
 import { createContext, useContext, useEffect, useMemo, useState, type PropsWithChildren } from 'react'
-
-import { auth } from '@/lib/firebase'
 
 type AuthContextValue = {
   ready: boolean
@@ -12,20 +10,51 @@ type AuthContextValue = {
 const AuthContext = createContext<AuthContextValue | null>(null)
 
 export function AuthProvider({ children }: PropsWithChildren) {
-  const [user, setUser] = useState<User | null>(auth.currentUser)
+  const [user, setUser] = useState<User | null>(null)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    return onAuthStateChanged(auth, (nextUser) => {
-      setUser(nextUser)
-      setReady(true)
-    })
+    let mounted = true
+    let unsubscribe: (() => void) | undefined
+
+    async function subscribeToAuthState() {
+      try {
+        const [{ auth }, { onAuthStateChanged }] = await Promise.all([import('@/lib/firebase'), import('firebase/auth')])
+
+        if (!mounted) {
+          return
+        }
+
+        setUser(auth.currentUser)
+        unsubscribe = onAuthStateChanged(auth, (nextUser) => {
+          setUser(nextUser)
+          setReady(true)
+        })
+      } catch (error) {
+        console.warn('[auth] Firebase auth failed to initialize.', error)
+
+        if (mounted) {
+          setReady(true)
+        }
+      }
+    }
+
+    subscribeToAuthState()
+
+    return () => {
+      mounted = false
+      unsubscribe?.()
+    }
   }, [])
 
   const value = useMemo<AuthContextValue>(
     () => ({
       ready,
-      signOut: () => signOut(auth),
+      signOut: async () => {
+        const [{ auth }, { signOut }] = await Promise.all([import('@/lib/firebase'), import('firebase/auth')])
+
+        await signOut(auth)
+      },
       user
     }),
     [ready, user]

@@ -1,9 +1,9 @@
 import { RIcon } from '@/components/icons'
-import { Button } from '@/components/ui'
 import { useAuthSession } from '@/ctx/auth'
 import { Button as Btn, Dialog } from 'heroui-native'
 import { ReactNode, useState } from 'react'
 import { View } from 'react-native'
+import { Button } from './button'
 
 interface ConfirmProps {
   isOpen?: boolean

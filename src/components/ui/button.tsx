@@ -2,8 +2,8 @@ import { PressableFeedback, type PressableFeedbackProps } from 'heroui-native'
 import type { PropsWithChildren, ReactNode } from 'react'
 import { View } from 'react-native'
 
-import { ThemedText } from '@/components/ui'
 import { cn } from '@/lib/cn'
+import { Text } from './text'
 
 type Tone = 'primary' | 'secondary' | 'tertiary' | 'quarternary' | 'ghost' | 'active'
 type AppButtonSize = 'sm' | 'md' | 'lg'
@@ -36,10 +36,10 @@ export function Button({
   return (
     <PressableFeedback
       accessibilityRole={accessibilityRole}
-      animation={{ scale: { value: 0.98 } }}
+      animation={{ scale: { value: 0.96 } }}
       className={cn(
-        'self-start flex-row items-center justify-center gap-2.5 border',
-        size === 'sm' && 'min-h-9 px-5 rounded-[6xp]',
+        'self-start flex-row items-center justify-center gap-3',
+        size === 'sm' && 'min-h-9 px-5 rounded-sm',
         size === 'md' && 'min-h-11 px-8 rounded-lg',
         size === 'lg' && 'min-h-14 px-12 rounded-[11px]',
         tone === 'primary' && 'border-foreground bg-foreground',
@@ -57,18 +57,19 @@ export function Button({
       {leadingIcon ? <View className='items-center justify-center -ml-1.5'>{leadingIcon}</View> : null}
 
       {typeof children === 'string' || typeof children === 'number' ? (
-        <ThemedText
+        <Text
           className={cn(
-            'font-semibold',
-            size === 'sm' && 'text-[14px] leading-5.5',
+            'font-semibold tracking-normal',
+            size === 'sm' && 'text-sm',
             size === 'md' && 'text-[15px] leading-5',
             size === 'lg' && 'text-[16px] leading-5.5',
             tone === 'primary' && 'text-background',
             tone === 'active' && 'text-white',
+            // 'tracking-normal',
             labelClassName
           )}>
           {children}
-        </ThemedText>
+        </Text>
       ) : (
         children
       )}

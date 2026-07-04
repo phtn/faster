@@ -18,6 +18,7 @@
 
   --color-active: var(--active);
   --color-active-foreground: var(--active-foreground);
+  --color-accent: oklch(0.8091 0.0956 251.81);
 }
 
 @layer theme {
@@ -47,7 +48,7 @@
       --default-foreground: var(--foreground);
 
       /*--accent: oklch(0.67 0.175 296);*/
-      --accent: var(--active);
+      --accent: var(--accent);
       --accent-foreground: var(--surface);
 
       --field-background: var(--surface);
