@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "faster",
+    "owner": "phtn458",
     "slug": "faster",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,9 +9,11 @@
     "scheme": "faster",
     "userInterfaceStyle": "automatic",
     "ios": {
+      "bundleIdentifier": "com.xpriori.faster",
       "icon": "./assets/expo.icon"
     },
     "android": {
+      "package": "com.xpriori.faster",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -39,6 +42,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a175e183-f604-48c9-a1ee-d43c2685adf4"
+      }
     }
   }
 }

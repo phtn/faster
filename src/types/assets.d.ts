@@ -1,0 +1,29 @@
+declare module '*.png' {
+  const asset: number
+  export default asset
+}
+
+declare module '*.jpg' {
+  const asset: number
+  export default asset
+}
+
+declare module '*.jpeg' {
+  const asset: number
+  export default asset
+}
+
+declare module '*.svg' {
+  const asset: number
+  export default asset
+}
+
+declare module '*.ttf' {
+  const asset: number
+  export default asset
+}
+
+declare module '*.woff2' {
+  const asset: number
+  export default asset
+}

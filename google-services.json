@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "225712966603",
+    "project_id": "fastinsure",
+    "storage_bucket": "fastinsure.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225712966603:android:c39c8204401414b8e5844e",
+        "android_client_info": {
+          "package_name": "com.xpriori.faster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225712966603-8uls3p9to0c8n66amc917hv8b26f9k8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBULpMoMN6U67lvaZDfBvmlM82lBNI6zhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225712966603-8uls3p9to0c8n66amc917hv8b26f9k8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
