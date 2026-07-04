@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { cn } from '@/lib/cn'
 import { Text } from './text'
 
-type SectionHeadingProps = {
+type HeadingProps = {
   align?: 'left' | 'center'
   className?: string
   description?: string
@@ -15,7 +15,7 @@ type SectionHeadingProps = {
   trailing?: ReactNode
 }
 
-export function SectionHeading({
+export function Heading({
   align = 'left',
   className,
   description,
@@ -24,7 +24,7 @@ export function SectionHeading({
   title,
   titleClassName,
   trailing
-}: SectionHeadingProps) {
+}: HeadingProps) {
   const centered = align === 'center'
 
   return (
@@ -52,3 +52,5 @@ export function SectionHeading({
     </View>
   )
 }
+
+export const SectionHeading = Heading

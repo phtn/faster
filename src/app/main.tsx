@@ -4,6 +4,7 @@ import { Image } from 'expo-image'
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import { Link } from 'expo-router'
 import { User } from 'firebase/auth'
 import driverJaneImage from '../../assets/images/main/driver-jane.webp'
 import driverJeromeImage from '../../assets/images/main/driver-jerome.webp'
@@ -81,9 +82,11 @@ export default function MainScreen({ user }: MainScreenProps) {
                 </View>
               </View>
 
-              <Pressable className='size-16 active:scale-95 items-center justify-center rounded-3xl'>
-                <RIcon color='#fafafa' name='settings' size={24} strokeWidth={1} />
-              </Pressable>
+              <Link href='/account' asChild>
+                <Pressable className='size-16 active:scale-95 items-center justify-center rounded-3xl'>
+                  <RIcon color='#fafafa' name='settings' size={24} strokeWidth={1} />
+                </Pressable>
+              </Link>
             </View>
 
             <View className='hidden mb-5 h-15 flex-row items-center justify-between rounded-[22px] bg-white px-6'>
@@ -164,7 +167,7 @@ function FloatingTabs({ bottomInset }: { bottomInset: number }) {
 
   return (
     <View className='absolute left-0 right-0 items-center px-8' style={{ bottom: Math.max(bottomInset, 16) + 6 }}>
-      <View className='h-20 w-full max-w-74 flex-row items-center justify-between rounded-[28px] bg-white/90 px-4'>
+      <View className='h-18 w-full max-w-74 flex-row items-center justify-between rounded-[28px] bg-white/90 px-4'>
         {tabs.map((tab, index) => (
           <Pressable
             className={[
