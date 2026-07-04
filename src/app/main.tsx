@@ -52,11 +52,6 @@ const listings: Listing[] = [
   }
 ]
 
-const surfaceShadow = {
-  boxShadow: '0 16px 24px rgba(201, 198, 190, 0.18)',
-  elevation: 5
-}
-
 export default function MainScreen() {
   const insets = useSafeAreaInsets()
 
@@ -88,9 +83,7 @@ export default function MainScreen() {
               </Pressable>
             </View>
 
-            <View
-              className='hidden mb-5 h-15 flex-row items-center justify-between rounded-[22px] bg-white px-6'
-              style={surfaceShadow}>
+            <View className='hidden mb-5 h-15 flex-row items-center justify-between rounded-[22px] bg-white px-6'>
               <Text className='text-[19px] leading-7 text-[#777777]'>Search</Text>
               <MCIcon color='#050505' name='magnify' size={24} />
             </View>

@@ -1,6 +1,26 @@
 const env = (name: string) => process.env[name] ?? ''
 const firstEnv = (...names: string[]) => names.map(env).find(Boolean) ?? ''
 
+type GoogleServicesJson = {
+  client?: {
+    oauth_client?: {
+      client_id?: string
+      client_type?: number
+    }[]
+  }[]
+}
+
+const googleServicesConfig = (() => {
+  try {
+    return require('../../../google-services.json') as GoogleServicesJson
+  } catch {
+    return null
+  }
+})()
+
+const googleServicesWebClientId =
+  googleServicesConfig?.client?.[0]?.oauth_client?.find((client) => client.client_type === 3)?.client_id ?? ''
+
 const firebaseWebConfig = {
   apiKey: firstEnv('EXPO_PUBLIC_FIREBASE_WEB_API_KEY', 'EXPO_PUBLIC_FIREBASE_ANDROID_API_KEY'),
   authDomain: env('EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN'),
@@ -23,7 +43,7 @@ export const firebaseConfig = firebaseWebConfig
 export const googleAuthConfig = {
   androidClientId: env('EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID'),
   iosClientId: env('EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID'),
-  webClientId: env('EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID')
+  webClientId: firstEnv('EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID') || googleServicesWebClientId
 } as const
 
 export const firebaseProjectConfig = {

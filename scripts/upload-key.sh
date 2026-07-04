@@ -1,0 +1,11 @@
+keytool -genkeypair \
+  -v \
+  -storetype PKCS12 \
+  -keystore app/faster-upload-key.jks \
+  -alias faster-upload \
+  -keyalg RSA \
+  -keysize 4096 \
+  -validity 10000 \
+  -storepass "c58711f47869" \
+  -keypass "c58711f47869" \
+  -dname "CN=FastInsure Technologies, OU=Mobile, O=FastInsure Technologies, L=Manila, ST=Metro Manila, C=PH"
