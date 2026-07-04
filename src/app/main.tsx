@@ -25,7 +25,7 @@ type Listing = {
 }
 
 const categories: Category[] = [
-  { icon: 'cell-phone', label: 'Mobile' },
+  { icon: 'phone-in-talk-outline', label: 'Mobile' },
   { icon: 'motorbike', label: 'Auto' },
   { icon: 'car-side', label: 'Travel' },
   { icon: 'map-marker-distance', label: 'PA' }
@@ -39,7 +39,7 @@ const listings: Listing[] = [
     driverImage: driverJeromeImage,
     rating: '95% Smooth Ride',
     rate: '$25/h',
-    time: '25mins'
+    time: '25 mins'
   },
   {
     car: 'Tesla Model 3',
@@ -48,7 +48,7 @@ const listings: Listing[] = [
     driverImage: driverJaneImage,
     rating: '87% Smooth Ride',
     rate: '$23/h',
-    time: '18mins'
+    time: '18 mins'
   }
 ]
 
@@ -71,12 +71,12 @@ export default function MainScreen() {
             paddingBottom: insets.bottom + 128
           }}
           showsVerticalScrollIndicator={false}>
-          <View className='px-4'>
+          <View className='px-0'>
             <View className='mb-4 flex-row items-center justify-between'>
               <View className='flex-row items-center gap-4'>
-                <Image contentFit='cover' source={profileImage} style={styles.profileImage} />
+                <Image contentFit='cover' source={profileImage} style={styles.profileImage} className='rounded-4xl' />
                 <View>
-                  <Text type='header' className='font-semibold'>
+                  <Text type='header' className='text-lg font-semibold'>
                     Welcome!
                   </Text>
                   <Text className='mt-0 text-base leading-6 text-[#777777]'>Select Your Car</Text>
@@ -84,7 +84,7 @@ export default function MainScreen() {
               </View>
 
               <Pressable className='size-16 items-center justify-center rounded-3xl'>
-                <RIcon color='#fafafa' name='bell' size={24} strokeWidth={2} />
+                <RIcon color='#fafafa' name='camera' size={24} strokeWidth={2} />
               </Pressable>
             </View>
 
@@ -98,7 +98,7 @@ export default function MainScreen() {
 
           <ScrollView
             className='mb-0'
-            contentContainerClassName='gap-4 px-4 pt-1 pb-6'
+            contentContainerClassName='gap-4 px-0 pt-1 pb-6'
             horizontal
             showsHorizontalScrollIndicator={false}>
             {categories.map((category) => (
@@ -109,7 +109,7 @@ export default function MainScreen() {
             ))}
           </ScrollView>
 
-          <View className='gap-6 px-4'>
+          <View className='gap-6 px-0'>
             {listings.map((listing, index) => (
               <ListingCard compact={index === 1} key={listing.driver} listing={listing} />
             ))}
@@ -124,9 +124,9 @@ export default function MainScreen() {
 
 function ListingCard({ compact = false, listing }: { compact?: boolean; listing: Listing }) {
   return (
-    <View className='overflow-hidden rounded-3xl bg-white'>
+    <View className='overflow-hidden rounded-4xl bg-white'>
       <View className='flex-row items-start justify-between'>
-        <View className='flex-row items-center gap-3 p-2'>
+        <View className='flex-row items-center gap-3 p-4'>
           <Image contentFit='cover' source={listing.driverImage} style={styles.driverImage} />
           <View>
             <Text className='font-semibold text-black'>{listing.driver}</Text>
@@ -135,22 +135,23 @@ function ListingCard({ compact = false, listing }: { compact?: boolean; listing:
             </Text>
           </View>
         </View>
-        <View className='rounded-l-full bg-[#F2F2F2] px-5 py-2'>
-          <Text className='text-[25px] font-semibold leading-8 text-black'>{listing.rate}</Text>
+        <View className='p-4'>
+          <Text className='text-2xl leading-8 text-default-hover'>{listing.rate}</Text>
         </View>
       </View>
+      <View className='py-8'>
+        <Image
+          contentFit='contain'
+          source={listing.carImage}
+          style={[styles.carImage, compact ? styles.compactCarImage : undefined]}
+        />
+      </View>
 
-      <Image
-        contentFit='contain'
-        source={listing.carImage}
-        style={[styles.carImage, compact ? styles.compactCarImage : undefined]}
-      />
-
-      <View className='flex-row items-center justify-between gap-3 rounded-tl-3xl bg-[#F3F3F3] p-4'>
+      <View className='flex-row items-center justify-between gap-4 _rounded-tl-3xl bg-[#F0F0F0] p-4 border-t border-default-soft'>
         <View className='min-w-0 flex-1'>
           <Text className='text-lg font-semibold leading-6 text-black'>{listing.car}</Text>
-          <View className='mt-2 flex-row items-center gap-2'>
-            <MCIcon color='#6F6F6F' name='clock-time-four-outline' size={19} />
+          <View className='mt-2 flex-row items-center gap-1'>
+            <MCIcon color='#6F6F6F' name='clock-time-four-outline' size={18} />
             <Text className='text-base text-[#6F6F6F]'>{listing.time}</Text>
           </View>
         </View>
@@ -209,8 +210,8 @@ const styles = StyleSheet.create({
     width: 36
   },
   profileImage: {
-    borderRadius: 22,
-    height: 62,
-    width: 62
+    borderRadius: 16,
+    height: 50,
+    width: 50
   }
 })
