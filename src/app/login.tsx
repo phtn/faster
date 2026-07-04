@@ -12,31 +12,23 @@ import { Button, Card, CardContent, CardHeader, Text } from '@/components/ui'
 import { useAuthSession } from '@/ctx/auth'
 import { auth } from '@/lib/firebase/client'
 import { googleAuthConfig } from '@/lib/firebase/config'
-import MainScreen from './main'
+import MainIndex from './main'
+import MainLayout from './main/_layout'
 
 WebBrowser.maybeCompleteAuthSession()
 
 type NativeGoogleSignInModule = typeof import('@react-native-google-signin/google-signin')
-
-const nativeGoogleSignInModule: NativeGoogleSignInModule | null =
-  Platform.OS === 'web'
-    ? null
-    : (() => {
-        try {
-          // eslint-disable-next-line @typescript-eslint/no-require-imports
-          return require('@react-native-google-signin/google-signin') as NativeGoogleSignInModule
-        } catch {
-          return null
-        }
-      })()
 
 export default function HomeScreen() {
   const { ready, user } = useAuthSession()
   const [busy, setBusy] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const isExpoGoNative = Platform.OS !== 'web' && Constants.executionEnvironment === 'storeClient'
-  const needsNativeRebuild = Platform.OS !== 'web' && !isExpoGoNative && !nativeGoogleSignInModule
-  const usesNativeGoogleSignIn = Platform.OS !== 'web' && !isExpoGoNative && Boolean(nativeGoogleSignInModule)
+  const shouldLoadNativeGoogleSignIn = Platform.OS !== 'web' && !isExpoGoNative
+  const [nativeGoogleSignInModule, setNativeGoogleSignInModule] = useState<NativeGoogleSignInModule | null>(null)
+  const [nativeGoogleSignInChecked, setNativeGoogleSignInChecked] = useState(!shouldLoadNativeGoogleSignIn)
+  const needsNativeRebuild = shouldLoadNativeGoogleSignIn && nativeGoogleSignInChecked && !nativeGoogleSignInModule
+  const usesNativeGoogleSignIn = shouldLoadNativeGoogleSignIn && Boolean(nativeGoogleSignInModule)
   const hasNativeWebClientId = Boolean(googleAuthConfig.webClientId)
 
   const [request, , promptAsync] = Google.useIdTokenAuthRequest({
@@ -57,6 +49,35 @@ export default function HomeScreen() {
   }, [])
 
   useEffect(() => {
+    if (!shouldLoadNativeGoogleSignIn) {
+      return
+    }
+
+    let mounted = true
+
+    void import('@react-native-google-signin/google-signin')
+      .then((module) => {
+        if (mounted) {
+          setNativeGoogleSignInModule(module)
+        }
+      })
+      .catch(() => {
+        if (mounted) {
+          setNativeGoogleSignInModule(null)
+        }
+      })
+      .finally(() => {
+        if (mounted) {
+          setNativeGoogleSignInChecked(true)
+        }
+      })
+
+    return () => {
+      mounted = false
+    }
+  }, [shouldLoadNativeGoogleSignIn])
+
+  useEffect(() => {
     if (!usesNativeGoogleSignIn) {
       return
     }
@@ -65,7 +86,7 @@ export default function HomeScreen() {
       iosClientId: googleAuthConfig.iosClientId || undefined,
       webClientId: googleAuthConfig.webClientId || undefined
     })
-  }, [usesNativeGoogleSignIn])
+  }, [nativeGoogleSignInModule, usesNativeGoogleSignIn])
 
   const googleStatusMessage = useMemo(() => {
     if (isExpoGoNative) {
@@ -74,6 +95,10 @@ export default function HomeScreen() {
 
     if (needsNativeRebuild) {
       return 'This build does not include native Google Sign-In yet. Rebuild and reinstall Android.'
+    }
+
+    if (Platform.OS !== 'web' && !nativeGoogleSignInChecked) {
+      return 'Preparing Google sign-in.'
     }
 
     if (usesNativeGoogleSignIn && !hasNativeWebClientId) {
@@ -93,12 +118,22 @@ export default function HomeScreen() {
     }
 
     return 'Preparing Google sign-in.'
-  }, [busy, hasNativeWebClientId, isExpoGoNative, needsNativeRebuild, ready, request, usesNativeGoogleSignIn])
+  }, [
+    busy,
+    hasNativeWebClientId,
+    isExpoGoNative,
+    nativeGoogleSignInChecked,
+    needsNativeRebuild,
+    ready,
+    request,
+    usesNativeGoogleSignIn
+  ])
 
   const isGoogleButtonDisabled =
     !ready ||
     busy ||
     isExpoGoNative ||
+    (Platform.OS !== 'web' && !nativeGoogleSignInChecked) ||
     needsNativeRebuild ||
     (usesNativeGoogleSignIn && !hasNativeWebClientId) ||
     (Platform.OS === 'web' && !request)
@@ -164,10 +199,14 @@ export default function HomeScreen() {
     } finally {
       setBusy(false)
     }
-  }, [exchangeGoogleToken, hasNativeWebClientId, promptAsync, usesNativeGoogleSignIn])
+  }, [exchangeGoogleToken, hasNativeWebClientId, nativeGoogleSignInModule, promptAsync, usesNativeGoogleSignIn])
 
   if (user) {
-    return <MainScreen user={user} />
+    return (
+      <MainLayout user={user}>
+        <MainIndex />
+      </MainLayout>
+    )
   }
 
   return (
