@@ -4,13 +4,13 @@ import { Image } from 'expo-image'
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import { User } from 'firebase/auth'
 import driverJaneImage from '../../assets/images/main/driver-jane.webp'
 import driverJeromeImage from '../../assets/images/main/driver-jerome.webp'
 import porscheImage from '../../assets/images/main/porsche-taycan.webp'
-import profileImage from '../../assets/images/main/profile.webp'
 
 type Category = {
-  icon: React.ComponentProps<typeof MCIcon>['name']
+  icon: React.ComponentProps<typeof RIcon>['name']
   label: string
 }
 
@@ -25,10 +25,10 @@ type Listing = {
 }
 
 const categories: Category[] = [
-  { icon: 'phone-in-talk-outline', label: 'Mobile' },
-  { icon: 'motorbike', label: 'Auto' },
-  { icon: 'car-side', label: 'Travel' },
-  { icon: 'map-marker-distance', label: 'PA' }
+  { icon: 'home', label: 'Mobile' },
+  { icon: 'home', label: 'Auto' },
+  { icon: 'home', label: 'Travel' },
+  { icon: 'home', label: 'PA' }
 ]
 
 const listings: Listing[] = [
@@ -52,7 +52,10 @@ const listings: Listing[] = [
   }
 ]
 
-export default function MainScreen() {
+interface MainScreenProps {
+  user: User
+}
+export default function MainScreen({ user }: MainScreenProps) {
   const insets = useSafeAreaInsets()
 
   return (
@@ -69,17 +72,17 @@ export default function MainScreen() {
           <View className='px-0'>
             <View className='mb-4 flex-row items-center justify-between'>
               <View className='flex-row items-center gap-4'>
-                <Image contentFit='cover' source={profileImage} style={styles.profileImage} className='rounded-4xl' />
+                <Image contentFit='cover' source={user.photoURL} style={styles.profileImage} className='rounded-4xl' />
                 <View>
                   <Text type='header' className='text-lg font-semibold'>
-                    Welcome!
+                    {user.displayName}
                   </Text>
-                  <Text className='mt-0 text-base leading-6 text-[#777777]'>Select Your Car</Text>
+                  <Text className='mt-0 text-base leading-6 text-[#777777]'>@{user.email?.split('@').shift()}</Text>
                 </View>
               </View>
 
-              <Pressable className='size-16 items-center justify-center rounded-3xl'>
-                <RIcon color='#fafafa' name='camera' size={24} strokeWidth={2} />
+              <Pressable className='size-16 active:scale-95 items-center justify-center rounded-3xl'>
+                <RIcon color='#fafafa' name='settings' size={24} strokeWidth={1} />
               </Pressable>
             </View>
 
@@ -157,12 +160,7 @@ function ListingCard({ compact = false, listing }: { compact?: boolean; listing:
 }
 
 function FloatingTabs({ bottomInset }: { bottomInset: number }) {
-  const tabs: React.ComponentProps<typeof MCIcon>['name'][] = [
-    'home-outline',
-    'calendar-month-outline',
-    'message-text-outline',
-    'account-outline'
-  ]
+  const tabs: React.ComponentProps<typeof RIcon>['name'][] = ['home', 'chat', 'grid', 'chest']
 
   return (
     <View className='absolute left-0 right-0 items-center px-8' style={{ bottom: Math.max(bottomInset, 16) + 6 }}>
@@ -174,7 +172,7 @@ function FloatingTabs({ bottomInset }: { bottomInset: number }) {
               index === 0 ? 'bg-black' : 'bg-transparent'
             ].join(' ')}
             key={tab}>
-            <MCIcon color={index === 0 ? '#FFFFFF' : '#6C6C6C'} name={tab} size={24} />
+            <RIcon color={index === 0 ? '#FFFFFF' : '#6C6C6C'} name={tab} size={24} />
           </Pressable>
         ))}
       </View>

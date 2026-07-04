@@ -167,11 +167,7 @@ export default function HomeScreen() {
   }, [exchangeGoogleToken, hasNativeWebClientId, promptAsync, usesNativeGoogleSignIn])
 
   if (user) {
-    return (
-      <MainScreen
-      // user={user}
-      />
-    )
+    return <MainScreen user={user} />
   }
 
   return (
