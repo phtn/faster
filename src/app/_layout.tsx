@@ -20,6 +20,7 @@ function RootStack() {
           // }
         }}>
         <Stack.Screen name='index' options={{ title: 'Faster' }} />
+        <Stack.Screen name='main' options={{ title: 'Main' }} />
         <Stack.Screen name='examples/index' options={{ title: 'Examples' }} />
         <Stack.Screen name='examples/[slug]' options={{ title: 'Example' }} />
         <Stack.Screen name='settings' options={{ title: 'Settings' }} />

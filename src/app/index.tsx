@@ -5,7 +5,7 @@ import { ScrollView } from 'react-native'
 export default function Index() {
   return (
     <ScrollView contentContainerClassName='gap-4 flex flex-row items-center justify-center h-screen' className=''>
-      <Link href='/account' asChild>
+      <Link href='/main' asChild>
         <Text className='text-white'>Enter</Text>
       </Link>
     </ScrollView>
