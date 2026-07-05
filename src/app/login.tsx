@@ -210,8 +210,8 @@ export default function HomeScreen() {
   }
 
   return (
-    <AuthScreen innerClassName='gap-6' keyboardShouldPersistTaps='handled' maxWidth={520}>
-      <View className='relative h-full overflow-hidden rounded-lg bg-linear-to-b from-secondary/20 to-background'>
+    <AuthScreen innerClassName='gap-6 bg-black' keyboardShouldPersistTaps='handled' maxWidth={520} className='bg-black'>
+      <View className='relative h-full overflow-hidden rounded-lg bg-black'>
         <Image
           className='h-full'
           contentFit='cover'
@@ -221,12 +221,12 @@ export default function HomeScreen() {
       </View>
 
       <Card className='absolute bottom-0 border-0 bg-transparent p-6 w-full'>
-        <CardHeader eyebrow='' title='FastInsure Technologies' description='' />
+        <CardHeader eyebrow='' title='FastInsure Technologies' description='' titleClassName='text-white' />
         <CardContent className='gap-4'>
           <Button
             fullWidth
             tone='primary'
-            className='bg-white border-none'
+            className='border-none'
             isDisabled={isGoogleButtonDisabled}
             leadingIcon={<GoogleMark />}
             onPress={() => void handleContinueWithGoogle()}>

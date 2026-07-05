@@ -15,9 +15,6 @@ function RootStack() {
           headerShown: false
           // headerShadowVisible: false
           // headerTintColor: '#0f172a',
-          // contentStyle: {
-          //   backgroundColor: '#f8fafc'
-          // }
         }}>
         <Stack.Screen name='index' options={{ title: 'Index' }} />
         <Stack.Screen name='main' options={{ title: 'Main' }} />

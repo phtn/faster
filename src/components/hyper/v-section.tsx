@@ -42,3 +42,24 @@ export const VSection = ({ title, items }: VSectionProps) => {
   )
 }
 // border-b border-accent last:border-b-0
+export const VFlatSection = ({ title, items }: VSectionProps) => {
+  return (
+    <Card className='bg-transparent border-0 py-4'>
+      <CardHeader className='px-0'>
+        <Text type='eyebrow' className='text-foreground/55'>
+          {title}
+        </Text>
+      </CardHeader>
+      <CardContent className='gap-0 p-0 rounded-xl border border-default-hover divide-y divide-default-hover'>
+        {items.map((item) => (
+          <View key={item.id} className='min-h-12 flex-row items-center justify-between gap-3 p-3'>
+            <View className='min-w-0 flex-1 gap-1'>
+              <Text>{item.label}</Text>
+            </View>
+            <Text>{item.value}</Text>
+          </View>
+        ))}
+      </CardContent>
+    </Card>
+  )
+}

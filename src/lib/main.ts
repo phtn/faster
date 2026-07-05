@@ -1,5 +1,7 @@
 import type { MainListing } from '@/components/main/listing-card'
 
+import samsungImage from '@/assets/images/mobile-brands/samsung.png'
+import gs26 from '@/assets/images/mobile-devices/gs26-black.png'
 import driverJaneImage from '../../assets/images/main/driver-jane.webp'
 import driverJeromeImage from '../../assets/images/main/driver-jerome.webp'
 import porscheImage from '../../assets/images/main/porsche-taycan.webp'
@@ -45,27 +47,15 @@ export const mainCategoryServices: Record<MainCategorySlug, MainCategoryService[
   mobile: [
     {
       car: 'Device Protection',
-      carImage: porscheImage,
-      driver: 'Mobile Care',
-      driverImage: driverJeromeImage,
+      carImage: gs26,
+      driver: 'Galaxy S26 Ultra',
+      driverImage: samsungImage,
       id: 'screen-cover',
-      rate: '$9/mo',
-      rating: 'Fast device claims',
-      time: '10 mins',
+      rate: '₱1500',
+      rating: 'This device',
+      time: 'Not Active',
       title: 'Device Protection',
       detail: 'Repairs and replacement support for accidental damage.'
-    },
-    {
-      car: 'Device Assist',
-      carImage: porscheImage,
-      driver: 'Support Desk',
-      driverImage: driverJaneImage,
-      id: 'device-assist',
-      rate: '$6/mo',
-      rating: 'Priority triage',
-      time: '8 mins',
-      title: 'Device assist',
-      detail: 'Fast claim triage for phones, tablets, and wearables.'
     }
   ],
   auto: [

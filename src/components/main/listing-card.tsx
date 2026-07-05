@@ -36,9 +36,9 @@ export function MainListingCard({ compact = false, listing }: MainListingCardPro
           <Text className='text-2xl leading-8 text-default-hover'>{listing.rate}</Text>
         </View>
       </View>
-      <View className='py-8'>
+      <View className='py-0'>
         <Image
-          contentFit='contain'
+          contentFit='cover'
           source={listing.carImage}
           style={[styles.carImage, compact ? styles.compactCarImage : undefined]}
         />
@@ -62,11 +62,12 @@ export function MainListingCard({ compact = false, listing }: MainListingCardPro
 
 const styles = StyleSheet.create({
   carImage: {
-    height: 168,
-    marginTop: 10,
-    marginBottom: 10,
-    padding: 8,
-    width: '100%'
+    height: 250,
+    marginTop: 0,
+    marginBottom: 0,
+    padding: 0,
+    width: '100%',
+    verticalAlign: 'top'
   },
   compactCarImage: {
     height: 160,
